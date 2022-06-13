@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolists.Domain.Core", "To
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolists.Domain.Services", "Todolists.Domain.Services\Todolists.Domain.Services.csproj", "{84B0EB42-48EE-47C8-833E-BED002BC60B8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{46918B4A-0E8F-45EA-A34A-7142BF117A11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolists.Infrastructure.Base", "Todolists.Infrastructure.Base\Todolists.Infrastructure.Base.csproj", "{19EAE17A-45A0-41F5-B2E3-BF7D23E8969D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +18,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C4C90B12-F57A-47F4-B3F8-33C3CC65F9DF} = {03393F20-9D49-4AD3-8623-3B223C108563}
 		{84B0EB42-48EE-47C8-833E-BED002BC60B8} = {03393F20-9D49-4AD3-8623-3B223C108563}
+		{19EAE17A-45A0-41F5-B2E3-BF7D23E8969D} = {46918B4A-0E8F-45EA-A34A-7142BF117A11}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C4C90B12-F57A-47F4-B3F8-33C3CC65F9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +29,9 @@ Global
 		{84B0EB42-48EE-47C8-833E-BED002BC60B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84B0EB42-48EE-47C8-833E-BED002BC60B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84B0EB42-48EE-47C8-833E-BED002BC60B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19EAE17A-45A0-41F5-B2E3-BF7D23E8969D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19EAE17A-45A0-41F5-B2E3-BF7D23E8969D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19EAE17A-45A0-41F5-B2E3-BF7D23E8969D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19EAE17A-45A0-41F5-B2E3-BF7D23E8969D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
