@@ -351,3 +351,7 @@ MigrationBackup/
 
 # JetBrains Rider
 .idea/
+
+# Solution files
+/src/Todolists/Todolists.Web.Identity/tempkey.jwk
+/src/Todolists/Todolists.Web.Identity/Keys/key*.xml
