@@ -19,4 +19,9 @@
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Todolists.Services.Shared\Todolists.Services.Shared.csproj" />
+      <ProjectReference Include="..\Todolists.Web.Dtos\Todolists.Web.Dtos.csproj" />
+    </ItemGroup>
+
 </Project>
