@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{03393F20-9D49-4AD3-8623-3B223C108563}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolists.Domain.Core", "Todolists.Domain.Core\Todolists.Domain.Core.csproj", "{C4C90B12-F57A-47F4-B3F8-33C3CC65F9DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C4C90B12-F57A-47F4-B3F8-33C3CC65F9DF} = {03393F20-9D49-4AD3-8623-3B223C108563}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4C90B12-F57A-47F4-B3F8-33C3CC65F9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4C90B12-F57A-47F4-B3F8-33C3CC65F9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4C90B12-F57A-47F4-B3F8-33C3CC65F9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4C90B12-F57A-47F4-B3F8-33C3CC65F9DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
