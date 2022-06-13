@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolists.Infrastructure.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolists.Infrastructure.Versions", "Todolists.Infrastructure.Versions\Todolists.Infrastructure.Versions.csproj", "{1F62A9ED-EAC8-46DB-95D4-6555ED5357E8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0D73E7BA-3A86-482C-BE00-A02AC1B131E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolists.Services.Shared", "Todolists.Services.Shared\Todolists.Services.Shared.csproj", "{5D776AE6-207D-4DF5-B94A-9ED06A918097}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,7 @@ Global
 		{19EAE17A-45A0-41F5-B2E3-BF7D23E8969D} = {46918B4A-0E8F-45EA-A34A-7142BF117A11}
 		{F3B0F156-89E2-4B84-8E01-6A75311B063C} = {46918B4A-0E8F-45EA-A34A-7142BF117A11}
 		{1F62A9ED-EAC8-46DB-95D4-6555ED5357E8} = {46918B4A-0E8F-45EA-A34A-7142BF117A11}
+		{5D776AE6-207D-4DF5-B94A-9ED06A918097} = {0D73E7BA-3A86-482C-BE00-A02AC1B131E3}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C4C90B12-F57A-47F4-B3F8-33C3CC65F9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -47,5 +52,9 @@ Global
 		{1F62A9ED-EAC8-46DB-95D4-6555ED5357E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F62A9ED-EAC8-46DB-95D4-6555ED5357E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F62A9ED-EAC8-46DB-95D4-6555ED5357E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D776AE6-207D-4DF5-B94A-9ED06A918097}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D776AE6-207D-4DF5-B94A-9ED06A918097}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D776AE6-207D-4DF5-B94A-9ED06A918097}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D776AE6-207D-4DF5-B94A-9ED06A918097}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
