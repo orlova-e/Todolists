@@ -1,0 +1,28 @@
+﻿FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+WORKDIR /app
+
+COPY *.sln .
+COPY Todolists.Domain.Core/*.csproj ./Todolists.Domain.Core/
+COPY Todolists.Domain.Services/*.csproj ./Todolists.Domain.Services/
+COPY Todolists.Infrastructure.Base/*.csproj ./Todolists.Infrastructure.Base/
+COPY Todolists.Infrastructure.DataAccess/*.csproj ./Todolists.Infrastructure.DataAccess/
+COPY Todolists.Services.Shared/*.csproj ./Todolists.Services.Shared/
+COPY Todolists.Web.Dtos/*.csproj ./Todolists.Web.Dtos/
+COPY Todolists.Web.Identity/*.csproj ./Todolists.Web.Identity/
+COPY Todolists.Web.API/*.csproj ./Todolists.Web.API/
+COPY Todolists.Infrastructure.Versions/*.csproj ./Todolists.Infrastructure.Versions/
+
+RUN dotnet restore
+
+COPY Todolists.Infrastructure.Versions/. ./Todolists.Infrastructure.Versions/
+
+WORKDIR /app/Todolists.Infrastructure.Versions
+
+RUN dotnet publish -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+WORKDIR /app
+
+COPY --from=build-env /app/Todolists.Infrastructure.Versions/out ./
+
+ENTRYPOINT [ "dotnet", "Todolists.Infrastructure.Versions.dll" ]
