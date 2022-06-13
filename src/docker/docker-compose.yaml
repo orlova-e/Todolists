@@ -1,0 +1,68 @@
+version: '3.4'
+services:
+  todolists-nginx:
+    networks:
+      - todolists-network
+    container_name: todolists-nginx
+    image: nginx:1.21.5
+    ports:
+      - '3000:80'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - todolists-identity
+      - todolists-api
+
+  todolists-api:
+    networks:
+      - todolists-network
+    container_name: todolists-api
+    build:
+      context: ./../Todolists
+      dockerfile: ./Dockerfile.API
+    depends_on:
+      - todolists-db
+      - todolists-versions
+      - todolists-identity
+    env_file:
+      - api.env
+
+  todolists-identity:
+    networks:
+      - todolists-network
+    container_name: todolists-identity
+    build:
+      context: ./../Todolists
+      dockerfile: ./Dockerfile.Identity
+    depends_on:
+      - todolists-db
+      - todolists-versions
+    env_file:
+      - identity.env
+    volumes:
+      - ./../Notes/Notes.Web.Identity/Keys:/root/.aspnet/DataProtection-Keys
+
+  todolists-versions:
+    networks:
+      - todolists-network
+    container_name: todolists-versions
+    build:
+      context: ./../Notes
+      dockerfile: ./Dockerfile.Versions
+    depends_on:
+      - todolists-db
+    env_file:
+      - versions.env
+
+  todolists-db:
+    networks:
+      - todolists-network
+    image: postgres:14.1
+    container_name: todolists-db
+    ports:
+      - '5432:5432'
+    env_file:
+      - postgres.env
+
+networks:
+  todolists-network:
