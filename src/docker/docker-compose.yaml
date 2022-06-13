@@ -40,14 +40,14 @@ services:
     env_file:
       - identity.env
     volumes:
-      - ./../Notes/Notes.Web.Identity/Keys:/root/.aspnet/DataProtection-Keys
+      - ./../Todolists/Todolists.Web.Identity/Keys:/root/.aspnet/DataProtection-Keys
 
   todolists-versions:
     networks:
       - todolists-network
     container_name: todolists-versions
     build:
-      context: ./../Notes
+      context: ./../Todolists
       dockerfile: ./Dockerfile.Versions
     depends_on:
       - todolists-db
