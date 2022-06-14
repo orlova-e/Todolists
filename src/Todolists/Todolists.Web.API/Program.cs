@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Todolists.Infrastructure.Base.Configuration;
 using Todolists.Infrastructure.DataAccess.Configuration;
+using Todolists.Services.Messaging.Configuration;
 using Todolists.Services.Shared.Configuration;
 using Todolists.Web.API.Configuration;
 using Todolists.Web.API.Middlewares;
@@ -13,6 +14,7 @@ services
     .AddBaseInfrastructure(builder.Configuration)
     .AddCommonInfrastructure()
     .AddSharedServices(typeof(Program).Assembly)
+    .AddMessagingServices(builder.Configuration)
     .AddWebServices(builder.Configuration);
 
 var app = builder.Build();
@@ -22,7 +24,8 @@ app
         {ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto})
     .UseRouting()
     .UseHttpsRedirection()
-    .UseLoggingMiddleware()
+    .UseLogging()
+    .UseCorrelationIds()
     .UseAuthentication()
     .UseAuthorization()
     .UseEndpoints(endpoints =>
