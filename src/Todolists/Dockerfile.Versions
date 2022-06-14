@@ -7,6 +7,7 @@ COPY Todolists.Domain.Services/*.csproj ./Todolists.Domain.Services/
 COPY Todolists.Infrastructure.Base/*.csproj ./Todolists.Infrastructure.Base/
 COPY Todolists.Infrastructure.DataAccess/*.csproj ./Todolists.Infrastructure.DataAccess/
 COPY Todolists.Services.Shared/*.csproj ./Todolists.Services.Shared/
+COPY Todolists.Services.Messaging/*.csproj ./Todolists.Services.Messaging/
 COPY Todolists.Web.Dtos/*.csproj ./Todolists.Web.Dtos/
 COPY Todolists.Web.Identity/*.csproj ./Todolists.Web.Identity/
 COPY Todolists.Web.API/*.csproj ./Todolists.Web.API/
