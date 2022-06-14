@@ -11,7 +11,8 @@ public class CorrelationIdMiddleware
     
     public async Task Invoke(HttpContext httpContext)
     {
-        httpContext.Session.SetString("CorrelationId", Guid.NewGuid().ToString());
+        if(!httpContext.Session.Keys.Contains("CorrelationId"))
+            httpContext.Session.SetString("CorrelationId", Guid.NewGuid().ToString());
         await _next(httpContext);
     }
 }
