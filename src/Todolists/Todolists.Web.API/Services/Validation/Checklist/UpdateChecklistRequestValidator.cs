@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Todolists.Infrastructure.DataAccess;
 using Todolists.Web.API.Services.Commands.Notes;
 using Todolists.Web.Dtos.Checklist;
 
@@ -6,10 +7,10 @@ namespace Todolists.Web.API.Services.Validation.Checklist;
 
 public class UpdateChecklistRequestValidator : DataValidator<UpdateChecklistRequest>
 {
-    public UpdateChecklistRequestValidator(IValidator<ChecklistEditorDto> validator)
+    public UpdateChecklistRequestValidator(IRepository repository)
     {
         RuleFor(x => x.Dto)
-            .SetValidator(validator).When(_ => validator is not null)
+            .SetValidator(new ChecklistEditorDtoValidator(repository))
             .OverridePropertyName(string.Empty);
     }
 }
