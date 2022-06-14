@@ -14,6 +14,7 @@ public class UpdateChecklistCommand : IRequestHandler<UpdateChecklistRequest, Ha
     private readonly IDateTimeService _dateTimeService;
     private readonly IMessageService _messageService;
     private readonly ITranslator _translator;
+    private readonly ICorrelationIdProvider _correlationIdProvider;
     private readonly IRepository _repository;
 
     public UpdateChecklistCommand(
@@ -21,12 +22,14 @@ public class UpdateChecklistCommand : IRequestHandler<UpdateChecklistRequest, Ha
         IDateTimeService dateTimeService,
         IMessageService messageService,
         ITranslator translator,
+        ICorrelationIdProvider correlationIdProvider,
         IRepository repository)
     {
         _logger = logger;
         _dateTimeService = dateTimeService;
         _messageService = messageService;
         _translator = translator;
+        _correlationIdProvider = correlationIdProvider;
         _repository = repository;
     }
 
@@ -43,8 +46,9 @@ public class UpdateChecklistCommand : IRequestHandler<UpdateChecklistRequest, Ha
             _dateTimeService.Updated(entity);
             await _repository.UpdateAsync<Checklist, Guid>(entity, cancellationToken);
             
+            var correlationId = _correlationIdProvider.GetCorrelationId();
             var checklistUpdatedDto = _translator.Translate<Checklist, ChecklistUpdatedDto>(entity);
-            _messageService.Send("update", checklistUpdatedDto);
+            _messageService.Send(correlationId, "update", checklistUpdatedDto);
             
             return HandlerResult<Unit>.Success();
         }

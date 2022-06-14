@@ -13,6 +13,7 @@ public class DeleteChecklistCommand : IRequestHandler<DeleteChecklistRequest, Ha
     private readonly ILogger<DeleteChecklistCommand> _logger;
     private readonly IDateTimeService _dateTimeService;
     private readonly IMessageService _messageService;
+    private readonly ICorrelationIdProvider _correlationIdProvider;
     private readonly ITranslator _translator;
     private readonly IRepository _repository;
 
@@ -20,12 +21,14 @@ public class DeleteChecklistCommand : IRequestHandler<DeleteChecklistRequest, Ha
         ILogger<DeleteChecklistCommand> logger,
         IDateTimeService dateTimeService,
         IMessageService messageService,
+        ICorrelationIdProvider correlationIdProvider,
         ITranslator translator,
         IRepository repository)
     {
         _logger = logger;
         _dateTimeService = dateTimeService;
         _messageService = messageService;
+        _correlationIdProvider = correlationIdProvider;
         _translator = translator;
         _repository = repository;
     }
@@ -43,8 +46,9 @@ public class DeleteChecklistCommand : IRequestHandler<DeleteChecklistRequest, Ha
             entity.IsDeleted = true;
             await _repository.UpdateAsync<Checklist, Guid>(entity, cancellationToken);
             
+            var correlationId = _correlationIdProvider.GetCorrelationId();
             var checklistDeletedDto = _translator.Translate<Checklist, ChecklistDeletedDto>(entity);
-            _messageService.Send("delete", checklistDeletedDto);
+            _messageService.Send(correlationId, "delete", checklistDeletedDto);
             
             return HandlerResult<Unit>.Success();
         }
