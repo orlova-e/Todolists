@@ -4,7 +4,7 @@ using Todolists.Web.Dtos.Shared;
 
 namespace Todolists.Web.API.Services.Validation.Shared;
 
-public class GetEntitiesDtoValidator : DataValidator<GetEntitiesDto>
+public class GetEntitiesDtoValidator : DtoValidator<GetEntitiesDto>
 {
     public GetEntitiesDtoValidator()
     {

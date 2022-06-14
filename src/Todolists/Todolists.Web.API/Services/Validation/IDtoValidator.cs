@@ -2,6 +2,6 @@
 
 namespace Todolists.Web.API.Services.Validation;
 
-public abstract class DataValidator<TDto> : AbstractValidator<TDto>
+public interface IDtoValidator<in TRequest>: IValidator<TRequest>
 {
 }

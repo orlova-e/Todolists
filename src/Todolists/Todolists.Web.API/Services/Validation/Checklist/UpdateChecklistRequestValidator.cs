@@ -5,7 +5,7 @@ using Todolists.Web.Dtos.Checklist;
 
 namespace Todolists.Web.API.Services.Validation.Checklist;
 
-public class UpdateChecklistRequestValidator : DataValidator<UpdateChecklistRequest>
+public class UpdateChecklistRequestValidator : DtoValidator<UpdateChecklistRequest>
 {
     public UpdateChecklistRequestValidator(IRepository repository)
     {
