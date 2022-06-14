@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolists.Web.Identity", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolists.Web.API", "Todolists.Web.API\Todolists.Web.API.csproj", "{961CFA4F-47CC-46CD-BAEF-9572B44F3486}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolists.Services.Messaging", "Todolists.Services.Messaging\Todolists.Services.Messaging.csproj", "{EAADE25A-BDA2-4037-9C3C-85FDE4E43DB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,7 @@ Global
 		{3F810E0C-DBFE-4ED7-8203-327D3573471B} = {7293A41F-5159-4FBA-B14A-66157C69431C}
 		{12EE3204-EA4F-474A-81A4-C79A2A4627F4} = {7293A41F-5159-4FBA-B14A-66157C69431C}
 		{961CFA4F-47CC-46CD-BAEF-9572B44F3486} = {7293A41F-5159-4FBA-B14A-66157C69431C}
+		{EAADE25A-BDA2-4037-9C3C-85FDE4E43DB0} = {0D73E7BA-3A86-482C-BE00-A02AC1B131E3}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C4C90B12-F57A-47F4-B3F8-33C3CC65F9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -79,5 +82,9 @@ Global
 		{961CFA4F-47CC-46CD-BAEF-9572B44F3486}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{961CFA4F-47CC-46CD-BAEF-9572B44F3486}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{961CFA4F-47CC-46CD-BAEF-9572B44F3486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAADE25A-BDA2-4037-9C3C-85FDE4E43DB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAADE25A-BDA2-4037-9C3C-85FDE4E43DB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAADE25A-BDA2-4037-9C3C-85FDE4E43DB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAADE25A-BDA2-4037-9C3C-85FDE4E43DB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
