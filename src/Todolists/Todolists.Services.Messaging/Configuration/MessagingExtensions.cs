@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using RabbitMQ.Client;
+using Todolists.Services.Messaging.Configuration.Models;
 using Todolists.Services.Messaging.Implementation;
 using Todolists.Services.Messaging.Interfaces;
 
@@ -25,6 +26,7 @@ public static class MessagingExtensions
         Type messageHandlerType = null)
     {
         services
+            .Configure<MessageBus>(configuration.GetSection(nameof(MessageBus)))
             .AddSingleton<IMessageService, MessageService>()
             .AddTransient<IHandlerFactory, HandlerFactory>()
             .AddSingleton<IBusInitializer, BusInitializer>()
