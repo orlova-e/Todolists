@@ -22,7 +22,7 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
         CancellationToken cancellationToken,
         RequestHandlerDelegate<TResponse> next)
     {
-        var validator = _serviceProvider.GetService<DataValidator<TRequest>>();
+        var validator = _serviceProvider.GetService<IDtoValidator<TRequest>>();
         if (validator == null)
             return await next();
 

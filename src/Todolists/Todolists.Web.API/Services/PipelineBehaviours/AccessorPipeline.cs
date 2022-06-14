@@ -23,7 +23,7 @@ public sealed class AccessorBehavior<TRequest, TResponse> : IPipelineBehavior<TR
         CancellationToken cancellationToken,
         RequestHandlerDelegate<TResponse> next)
     {
-        var validator = _serviceProvider.GetService<AccessValidator<TRequest>>();
+        var validator = _serviceProvider.GetService<IAccessValidator<TRequest>>();
         if (validator == null)
             return await next();
 
