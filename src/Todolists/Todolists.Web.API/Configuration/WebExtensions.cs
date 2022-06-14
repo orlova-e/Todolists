@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Todolists.Web.API.Services.PipelineBehaviours;
@@ -22,8 +23,16 @@ public static class WebExtensions
         var identityOptions = configuration
             .GetSection(nameof(IdentityOptions))
             .Get<IdentityOptions>();
-        
+
         services
+            .AddControllers()
+            .AddOData(options =>
+                options.Select()
+                    .Filter()
+                    .OrderBy()
+                    .Expand()
+                    .Count())
+            .Services
             .AddAutoMapper(typeof(Program).Assembly)
             .AddValidatorsFromAssemblyContaining<CreateUserAccountDtoValidator>()
             .AddMediatR(typeof(CreateUserAccountRequest).Assembly)

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Todolists.Web.API.Services.Commands;
 using Todolists.Web.Dtos.Shared;
 using Todolists.Web.API.Services.Commands.Notes;
@@ -20,6 +21,7 @@ public class TodolistsController : ControllerBase
     
     [HttpGet]
     [Route("{id:guid}")]
+    [EnableQuery]
     public async Task<IActionResult> GetAsync([FromRoute] Guid id)
     {
         var result = await _mediator.Send(new GetChecklistRequest(id));
@@ -28,6 +30,7 @@ public class TodolistsController : ControllerBase
     
     [HttpGet]
     [Route("")]
+    [EnableQuery]
     public async Task<IActionResult> GetAsync([FromQuery] GetEntitiesDto dto)
     {
         var result = await _mediator.Send(new GetChecklistsRequest(dto));
