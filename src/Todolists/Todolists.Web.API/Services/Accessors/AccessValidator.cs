@@ -2,6 +2,6 @@
 
 namespace Todolists.Web.API.Services.Accessors;
 
-public abstract class AccessValidator<TRequest> : AbstractValidator<TRequest>
+public abstract class AccessValidator<TRequest> : AbstractValidator<TRequest>, IAccessValidator<TRequest>
 {
 }
