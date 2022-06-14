@@ -24,6 +24,7 @@ services:
       - todolists-db
       - todolists-versions
       - todolists-identity
+      - todolists-rabbitmq
     env_file:
       - api.env
 
@@ -63,6 +64,17 @@ services:
       - '5432:5432'
     env_file:
       - postgres.env
+
+  todolists-rabbitmq:
+    networks:
+      - todolists-network
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    env_file:
+      - rabbitmq.env
 
 networks:
   todolists-network:
