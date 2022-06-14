@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Todolists.Services.Messaging\Todolists.Services.Messaging.csproj" />
       <ProjectReference Include="..\Todolists.Services.Shared\Todolists.Services.Shared.csproj" />
       <ProjectReference Include="..\Todolists.Web.Dtos\Todolists.Web.Dtos.csproj" />
     </ItemGroup>
