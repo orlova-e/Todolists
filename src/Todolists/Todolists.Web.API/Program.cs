@@ -24,6 +24,7 @@ app
         {ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto})
     .UseRouting()
     .UseHttpsRedirection()
+    .UseSession()
     .UseLogging()
     .UseCorrelationIds()
     .UseAuthentication()

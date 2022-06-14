@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
+using Todolists.Services.Messaging.Interfaces;
 using Todolists.Web.API.Services.PipelineBehaviours;
 using Todolists.Services.Shared.Interfaces;
 using Todolists.Web.API.Models;
@@ -33,6 +34,13 @@ public static class WebExtensions
                     .Expand()
                     .Count())
             .Services
+            .AddDistributedMemoryCache()
+            .AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(20);
+                options.Cookie.HttpOnly = false;
+                options.Cookie.IsEssential = true;
+            })
             .AddHostedService<HostedService>()
             .AddAutoMapper(typeof(Program).Assembly)
             .AddValidatorsFromAssemblyContaining<CreateUserAccountDtoValidator>()
@@ -52,6 +60,7 @@ public static class WebExtensions
             })
             .Services
             .AddAuthorization()
+            .AddScoped<ICorrelationIdProvider, CorrelationIdProvider>()
             .AddTransient<ICurrentUserService, CurrentUserService>()
             .AddHttpContextAccessor()
             .TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
