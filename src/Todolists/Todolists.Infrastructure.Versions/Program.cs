@@ -1,7 +1,9 @@
-﻿using FluentMigrator.Runner;
+﻿using System.Net.Sockets;
+using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Polly;
 using Todolists.Infrastructure.Versions.Migrations;
 
 namespace Todolists.Infrastructure.Versions;
@@ -14,7 +16,16 @@ internal static class Program
         using var scope = host.Services.CreateScope();
         
         var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
-        runner.MigrateUp();
+        
+        var maxRetryAttempts = 20;
+        var pausesBetweenFailures = TimeSpan.FromSeconds(5);
+
+        var retryPolicy = Policy
+            .HandleInner<SocketException>()
+            .WaitAndRetry(maxRetryAttempts,
+                i => pausesBetweenFailures);
+
+        retryPolicy.Execute(() => runner.MigrateUp());
     }
 
     private static IHostBuilder CreateHostBuilder(string[] args) =>
