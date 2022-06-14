@@ -33,6 +33,7 @@ public static class WebExtensions
                     .Expand()
                     .Count())
             .Services
+            .AddHostedService<HostedService>()
             .AddAutoMapper(typeof(Program).Assembly)
             .AddValidatorsFromAssemblyContaining<CreateUserAccountDtoValidator>()
             .AddMediatR(typeof(CreateUserAccountRequest).Assembly)
