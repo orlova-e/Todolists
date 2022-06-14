@@ -9,32 +9,28 @@ namespace Todolists.Services.Messaging.Implementation;
 
 public class MessageService : IMessageService
 {
-    private readonly ICorrelationIdProvider _correlationIdProvider;
     private readonly MessageBusParameters _busParameters;
     private readonly ILogger<MessageService> _logger;
     private readonly Lazy<IModel> _channel;
 
     public MessageService(
         IConnection connection,
-        ICorrelationIdProvider correlationIdProvider,
         MessageBusParameters busParameters,
         ILogger<MessageService> logger)
     {
-        _correlationIdProvider = correlationIdProvider;
         _busParameters = busParameters;
         _logger = logger;
         _channel = new Lazy<IModel>(() => connection.CreateModel());
     }
     
-    public void Send<T>(string routingKey, T message)
+    public void Send<T>(Guid correlationId, string routingKey, T message)
     {
-        var correlationId = _correlationIdProvider.GetCorrelationId().ToString();
         _logger.LogInformation("Start sending message with {correlationId}", correlationId);
 
         try
         {
             var properties = _channel.Value.CreateBasicProperties();
-            properties.CorrelationId = correlationId;
+            properties.CorrelationId = correlationId.ToString();
             properties.ContentEncoding = nameof(Encoding.UTF8);
             properties.Type = message.GetType().Name;
             properties.Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
