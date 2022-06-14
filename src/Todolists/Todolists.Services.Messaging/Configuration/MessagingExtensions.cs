@@ -14,11 +14,9 @@ public static class MessagingExtensions
         IConfiguration configuration,
         Type messageHandlerType = null)
     {
-        services
+        return services
             .AddOptions()
             .AddRabbitMq(configuration, messageHandlerType);
-
-        return services;
     }
 
     private static IServiceCollection AddRabbitMq(
@@ -29,6 +27,7 @@ public static class MessagingExtensions
         services
             .AddSingleton<IMessageService, MessageService>()
             .AddTransient<IHandlerFactory, HandlerFactory>()
+            .AddSingleton<IBusInitializer, BusInitializer>()
             .AddSingleton<MessageBusParameters>()
             .AddSingleton<IConnection>(_ =>
             {
