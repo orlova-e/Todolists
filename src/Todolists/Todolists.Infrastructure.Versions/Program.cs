@@ -17,7 +17,7 @@ internal static class Program
         
         var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
         
-        var maxRetryAttempts = 20;
+        const int maxRetryAttempts = 20;
         var pausesBetweenFailures = TimeSpan.FromSeconds(5);
 
         var retryPolicy = Policy
@@ -47,7 +47,7 @@ internal static class Program
                 services
                     .AddFluentMigratorCore()
                     .ConfigureRunner(r => r
-                        .AddPostgres()
+                        .AddSqlServer()
                         .WithGlobalConnectionString(connectionString)
                         .ScanIn(typeof(Migration1).Assembly).For.Migrations())
                     .AddLogging(l => l.AddFluentMigratorConsole())

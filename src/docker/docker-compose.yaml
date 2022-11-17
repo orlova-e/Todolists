@@ -57,13 +57,13 @@ services:
 
   todolists-db:
     networks:
-      - todolists-network
-    image: postgres:14.1
+      - tasks-network
+    image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: todolists-db
     ports:
-      - '5432:5432'
+      - '1433:1433'
     env_file:
-      - postgres.env
+      - sqlserver.env
 
   todolists-rabbitmq:
     networks:
