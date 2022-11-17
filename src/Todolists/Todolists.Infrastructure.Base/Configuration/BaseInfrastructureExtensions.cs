@@ -13,9 +13,7 @@ public static class BaseInfrastructureExtensions
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         services
-            .AddDbContext<Context>(option => option.UseNpgsql(connectionString));
-            
-        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            .AddDbContext<Context>(option => option.UseSqlServer(connectionString));
 
         return services;
     }
