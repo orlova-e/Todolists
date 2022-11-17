@@ -57,7 +57,7 @@ services:
 
   todolists-db:
     networks:
-      - tasks-network
+      - todolists-network
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: todolists-db
     ports:

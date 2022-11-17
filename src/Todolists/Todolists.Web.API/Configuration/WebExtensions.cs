@@ -46,7 +46,7 @@ public static class WebExtensions
                     .Expand()
                     .Count())
             .Services
-            .AddSwagger(configuration)
+            .AddSwagger()
             .AddLogging(b => b.SetMinimumLevel(LogLevel.Warning)
                 .AddSerilog(logger))
             .AddDistributedMemoryCache()
@@ -85,37 +85,18 @@ public static class WebExtensions
         return services;
     }
     
-    private static IServiceCollection AddSwagger(
-        this IServiceCollection services,
-        IConfiguration configuration)
+    private static IServiceCollection AddSwagger(this IServiceCollection services)
     {
-        var swaggerOptions = configuration
-            .GetSection(nameof(SwaggerOptions))
-            .Get<SwaggerOptions>();
-        
         services.AddSwaggerGen(options =>
         {
-            options.SwaggerDoc(swaggerOptions.DocName, new OpenApiInfo
+            options.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = swaggerOptions.DocTitle,
-                Version = swaggerOptions.DocVersion
+                Title = "API",
+                Version = "v1"
             });
         });
 
         return services;
-    }
-    
-    public static IApplicationBuilder UseSwaggerWithUI(this IApplicationBuilder builder)
-    {
-        var swaggerOptions = builder.ApplicationServices.GetRequiredService<IOptions<SwaggerOptions>>().Value;
-
-        return builder.UseSwaggerUI(options =>
-        {
-            options.SwaggerEndpoint(swaggerOptions.EndpointPath, swaggerOptions.EndpointName);
-            options.OAuthClientId(swaggerOptions.OAuthClientId);
-            options.OAuthAppName(swaggerOptions.OAuthAppName);
-            options.OAuthUsePkce();
-        });
     }
 
     private static IServiceCollection AddValidators(

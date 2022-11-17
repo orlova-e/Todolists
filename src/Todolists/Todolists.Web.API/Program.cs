@@ -20,17 +20,25 @@ services
 var app = builder.Build();
 
 app
+    .UseDeveloperExceptionPage()
     .UseForwardedHeaders(new ForwardedHeadersOptions 
         {ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto})
     .UseRouting()
     .UseHttpsRedirection()
     .UseSession()
     .UseLogging()
-    .UseSwagger()
-    .UseSwaggerWithUI()
     .UseCorrelationIds()
     .UseAuthentication()
     .UseAuthorization()
+    .UseSwagger()
+    .UseSwaggerUI(options =>
+    {
+        const string endpoint = "v1/swagger.json";
+        options.SwaggerEndpoint(endpoint, "API");
+        options.OAuthClientId("api_swagger");
+        options.OAuthAppName("API - Swagger");
+        options.OAuthUsePkce();
+    })
     .UseEndpoints(endpoints =>
     {
         endpoints.MapControllers();
