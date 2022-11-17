@@ -8,18 +8,18 @@ public class Migration4 : Migration
     public override void Up()
     {
         Create
-            .Table("checklists")
-            .WithColumn("id").AsGuid().PrimaryKey();
+            .Table("Checklists")
+            .WithColumn("Id").AsGuid().PrimaryKey();
         
         Create
-            .ForeignKey("FK_checklists_notebases_id")
-            .FromTable("checklists").ForeignColumn("id")
-            .ToTable("notebases").PrimaryColumn("id");
+            .ForeignKey("FK_Checklists_NoteBases_Id")
+            .FromTable("Checklists").ForeignColumn("Id")
+            .ToTable("NoteBases").PrimaryColumn("Id");
     }
 
     public override void Down()
     {
         Delete
-            .Table("checklists");
+            .Table("Checklists");
     }
 }

@@ -9,16 +9,16 @@ public class ChecklistConfiguration : IEntityTypeConfiguration<Checklist>
     public void Configure(EntityTypeBuilder<Checklist> builder)
     {
         builder
-            .ToTable("checklists");
+            .ToTable("Checklists");
         
         builder
             .HasIndex(x => x.Id)
-            .HasName("PK_checklists")
+            .HasName("PK_Checklists")
             .IsUnique();
 
         builder
             .HasMany(x => x.Options)
             .WithOne()
-            .HasForeignKey("checklistid");
+            .HasForeignKey("ChecklistId");
     }
 }

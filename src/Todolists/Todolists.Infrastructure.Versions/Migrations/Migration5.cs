@@ -8,22 +8,22 @@ public class Migration5 : Migration
     public override void Up()
     {
         Create
-            .Table("options")
-            .WithColumn("id").AsGuid().PrimaryKey()
-            .WithColumn("isdeleted").AsBoolean().NotNullable()
-            .WithColumn("checked").AsBoolean().NotNullable()
-            .WithColumn("text").AsString().Nullable()
-            .WithColumn("checklistid").AsGuid().NotNullable();
+            .Table("Options")
+            .WithColumn("Id").AsGuid().PrimaryKey()
+            .WithColumn("IsDeleted").AsBoolean().NotNullable()
+            .WithColumn("Checked").AsBoolean().NotNullable()
+            .WithColumn("Text").AsString().Nullable()
+            .WithColumn("ChecklistId").AsGuid().NotNullable();
         
         Create
-            .ForeignKey("FK_options_checklistid")
-            .FromTable("options").ForeignColumn("checklistid")
-            .ToTable("checklists").PrimaryColumn("id");
+            .ForeignKey("FK_Options_ChecklistId")
+            .FromTable("Options").ForeignColumn("ChecklistId")
+            .ToTable("Checklists").PrimaryColumn("Id");
     }
 
     public override void Down()
     {
         Delete
-            .Table("options");
+            .Table("Options");
     }
 }

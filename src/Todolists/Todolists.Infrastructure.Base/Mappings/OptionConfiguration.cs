@@ -9,43 +9,43 @@ public class OptionConfiguration : IEntityTypeConfiguration<Option>
     public void Configure(EntityTypeBuilder<Option> builder)
     {
         builder
-            .ToTable("options");
+            .ToTable("Options");
         
         builder
             .HasKey(x => x.Id)
-            .HasName("id");
+            .HasName("Id");
         
         builder
             .HasIndex(x => x.Id)
-            .HasName("PK_options")
+            .HasName("PK_Options")
             .IsUnique();
         
         builder
             .Property(x => x.Id)
             .HasColumnType(DbTypes.Uuid)
-            .HasColumnName("id")
+            .HasColumnName("Id")
             .IsRequired();
         
         builder
-            .Property<Guid>("checklistid")
+            .Property<Guid>("ChecklistId")
             .IsRequired();
         
         builder
             .Property(x => x.IsDeleted)
             .HasColumnType(DbTypes.Boolean)
-            .HasColumnName("isdeleted")
+            .HasColumnName("IsDeleted")
             .IsRequired();
         
         builder
             .Property(x => x.Checked)
             .HasColumnType(DbTypes.Boolean)
-            .HasColumnName("checked")
+            .HasColumnName("Checked")
             .IsRequired();
         
         builder
             .Property(x => x.Text)
             .HasColumnType(DbTypes.Text)
-            .HasColumnName("text")
+            .HasColumnName("Text")
             .IsRequired(false);
 
         builder

@@ -9,57 +9,57 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder
-            .ToTable("users");
+            .ToTable("Users");
 
         builder
             .HasKey(x => x.Id)
-            .HasName("id");
+            .HasName("Id");
         
         builder
             .HasIndex(x => x.Id)
-            .HasName("PK_users")
+            .HasName("PK_Users")
             .IsUnique();
         
         builder
             .Property(x => x.Id)
             .HasColumnType(DbTypes.Uuid)
-            .HasColumnName("id")
+            .HasColumnName("Id")
             .IsRequired();
         
         builder
             .Property(x => x.IsDeleted)
             .HasColumnType(DbTypes.Boolean)
-            .HasColumnName("isdeleted")
+            .HasColumnName("IsDeleted")
             .IsRequired();
 
         builder
             .Property(x => x.Name)
             .HasColumnType(DbTypes.Text)
-            .HasColumnName("name")
+            .HasColumnName("Name")
             .IsRequired();
         
         builder
             .Property(x => x.Created)
             .HasColumnType(DbTypes.TimestampWithoutTimeZone)
-            .HasColumnName("created")
+            .HasColumnName("Created")
             .IsRequired();
         
         builder
             .Property(x => x.Updated)
             .HasColumnType(DbTypes.TimestampWithoutTimeZone)
-            .HasColumnName("updated")
+            .HasColumnName("Updated")
             .IsRequired(false);
         
         builder
             .Property(x => x.Deleted)
             .HasColumnType(DbTypes.TimestampWithoutTimeZone)
-            .HasColumnName("deleted")
+            .HasColumnName("Deleted")
             .IsRequired(false);
 
         builder
             .HasOne(x => x.Account)
             .WithOne(x => x.User)
             .HasForeignKey<Account>(x => x.UserId)
-            .HasConstraintName("FK_accounts_userid");
+            .HasConstraintName("FK_Accounts_UserId");
     }
 }

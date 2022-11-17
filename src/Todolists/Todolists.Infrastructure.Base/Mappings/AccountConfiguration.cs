@@ -9,63 +9,63 @@ public class AccountConfiguration : IEntityTypeConfiguration<Account>
     public void Configure(EntityTypeBuilder<Account> builder)
     {
         builder
-            .ToTable("accounts");
+            .ToTable("Accounts");
 
         builder
             .HasKey(x => x.Id)
-            .HasName("id");
+            .HasName("Id");
         
         builder
             .HasIndex(x => x.Id)
-            .HasName("PK_accounts")
+            .HasName("PK_Accounts")
             .IsUnique();
         
         builder
             .Property(x => x.Id)
             .HasColumnType(DbTypes.Uuid)
-            .HasColumnName("id")
+            .HasColumnName("Id")
             .IsRequired();
         
         builder
             .Property(x => x.IsDeleted)
             .HasColumnType(DbTypes.Boolean)
-            .HasColumnName("isdeleted")
+            .HasColumnName("IsDeleted")
             .IsRequired();
         
         builder
             .Property(x => x.Email)
             .HasColumnType(DbTypes.Text)
-            .HasColumnName("email")
+            .HasColumnName("Email")
             .IsRequired();
         
         builder
             .Property(x => x.Hash)
             .HasColumnType(DbTypes.Text)
-            .HasColumnName("hash")
+            .HasColumnName("Hash")
             .IsRequired();
         
         builder
             .Property(x => x.UserId)
             .HasColumnType(DbTypes.Uuid)
-            .HasColumnName("userid")
+            .HasColumnName("UserId")
             .IsRequired();
         
         builder
             .Property(x => x.Created)
             .HasColumnType(DbTypes.TimestampWithoutTimeZone)
-            .HasColumnName("created")
+            .HasColumnName("Created")
             .IsRequired();
         
         builder
             .Property(x => x.Updated)
             .HasColumnType(DbTypes.TimestampWithoutTimeZone)
-            .HasColumnName("updated")
+            .HasColumnName("Updated")
             .IsRequired(false);
         
         builder
             .Property(x => x.Deleted)
             .HasColumnType(DbTypes.TimestampWithoutTimeZone)
-            .HasColumnName("deleted")
+            .HasColumnName("Deleted")
             .IsRequired(false);
     }
 }
