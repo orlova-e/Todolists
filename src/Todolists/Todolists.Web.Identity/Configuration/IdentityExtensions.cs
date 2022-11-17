@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
+using Serilog;
 using Todolists.Web.Identity.Application;
 using Todolists.Web.Identity.Dto;
 using Todolists.Web.Identity.Models;
@@ -20,8 +21,15 @@ namespace Todolists.Web.Identity.Configuration
             var identityOptions = configuration.GetSection(nameof(IdentityOptions)).Get<IdentityOptions>();
 
             var keysDirectory = Path.Combine(webHostEnvironment.ContentRootPath, "Keys");
+            
+            var loggingFilePath = configuration["LoggingFilePath"];
+            var logger = new LoggerConfiguration()
+                .WriteTo.File(loggingFilePath)
+                .CreateLogger();
 
             services
+                .AddLogging(b => b.SetMinimumLevel(LogLevel.Warning)
+                    .AddSerilog(logger))
                 .AddScoped<IValidator<LoginDto>, LoginDtoValidator>()
                 .AddIdentityServer()
                 .AddDeveloperSigningCredential()

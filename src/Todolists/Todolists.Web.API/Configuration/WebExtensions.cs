@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using Todolists.Services.Messaging.Interfaces;
 using Todolists.Web.API.Services.PipelineBehaviours;
 using Todolists.Services.Shared.Interfaces;
@@ -30,6 +31,12 @@ public static class WebExtensions
             .GetSection(nameof(IdentityOptions))
             .Get<IdentityOptions>();
 
+        var loggingFilePath = configuration["LoggingFilePath"];
+        
+        var logger = new LoggerConfiguration()
+            .WriteTo.File(loggingFilePath)
+            .CreateLogger();
+
         services
             .AddControllers()
             .AddOData(options =>
@@ -40,6 +47,8 @@ public static class WebExtensions
                     .Count())
             .Services
             .AddSwagger(configuration)
+            .AddLogging(b => b.SetMinimumLevel(LogLevel.Warning)
+                .AddSerilog(logger))
             .AddDistributedMemoryCache()
             .AddSession(options =>
             {

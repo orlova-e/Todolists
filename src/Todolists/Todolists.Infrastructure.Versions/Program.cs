@@ -3,7 +3,9 @@ using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Polly;
+using Serilog;
 using Todolists.Infrastructure.Versions.Migrations;
 
 namespace Todolists.Infrastructure.Versions;
@@ -33,7 +35,7 @@ internal static class Program
             .ConfigureAppConfiguration(configure =>
             {
                 var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
-    
+
                 configure
                     .AddJsonFile($"appsettings.json", optional: false)
                     .AddJsonFile($"appsettings.{environment}.json", optional: false)
@@ -44,6 +46,11 @@ internal static class Program
             {
                 var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
                 
+                var loggingFilePath = context.Configuration["LoggingFilePath"];
+                var logger = new LoggerConfiguration()
+                    .WriteTo.File(loggingFilePath)
+                    .CreateLogger();
+                
                 services
                     .AddFluentMigratorCore()
                     .ConfigureRunner(r => r
@@ -51,6 +58,9 @@ internal static class Program
                         .WithGlobalConnectionString(connectionString)
                         .ScanIn(typeof(Migration1).Assembly).For.Migrations())
                     .AddLogging(l => l.AddFluentMigratorConsole())
+                    .AddLogging(b => b.SetMinimumLevel(LogLevel.Warning)
+                        .AddFluentMigratorConsole()
+                        .AddSerilog(logger))
                     .BuildServiceProvider(false);
             });
 }
