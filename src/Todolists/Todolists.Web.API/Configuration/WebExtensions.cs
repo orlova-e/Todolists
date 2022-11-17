@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Todolists.Services.Messaging.Interfaces;
 using Todolists.Web.API.Services.PipelineBehaviours;
 using Todolists.Services.Shared.Interfaces;
@@ -37,6 +39,7 @@ public static class WebExtensions
                     .Expand()
                     .Count())
             .Services
+            .AddSwagger(configuration)
             .AddDistributedMemoryCache()
             .AddSession(options =>
             {
@@ -71,6 +74,39 @@ public static class WebExtensions
             .TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
         
         return services;
+    }
+    
+    private static IServiceCollection AddSwagger(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        var swaggerOptions = configuration
+            .GetSection(nameof(SwaggerOptions))
+            .Get<SwaggerOptions>();
+        
+        services.AddSwaggerGen(options =>
+        {
+            options.SwaggerDoc(swaggerOptions.DocName, new OpenApiInfo
+            {
+                Title = swaggerOptions.DocTitle,
+                Version = swaggerOptions.DocVersion
+            });
+        });
+
+        return services;
+    }
+    
+    public static IApplicationBuilder UseSwaggerWithUI(this IApplicationBuilder builder)
+    {
+        var swaggerOptions = builder.ApplicationServices.GetRequiredService<IOptions<SwaggerOptions>>().Value;
+
+        return builder.UseSwaggerUI(options =>
+        {
+            options.SwaggerEndpoint(swaggerOptions.EndpointPath, swaggerOptions.EndpointName);
+            options.OAuthClientId(swaggerOptions.OAuthClientId);
+            options.OAuthAppName(swaggerOptions.OAuthAppName);
+            options.OAuthUsePkce();
+        });
     }
 
     private static IServiceCollection AddValidators(

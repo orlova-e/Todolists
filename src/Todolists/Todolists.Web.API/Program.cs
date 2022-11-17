@@ -26,6 +26,8 @@ app
     .UseHttpsRedirection()
     .UseSession()
     .UseLogging()
+    .UseSwagger()
+    .UseSwaggerWithUI()
     .UseCorrelationIds()
     .UseAuthentication()
     .UseAuthorization()
